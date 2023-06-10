@@ -23,13 +23,13 @@ SELECT DISTINCT name
         WHERE date BETWEEN '01/01/2022' AND '31/12/2022'
         EXCEPT
         SELECT date
-        FROM ("order" O NATURAL JOIN employee e) PR
+        FROM (employee e NATURAL JOIN process NATURAL JOIN "order") PR
         WHERE PR.name = EF.name
                   AND date BETWEEN '01/01/2022' AND '31/12/2022'
     );
 
     --ex3 seems done
-SELECT EXTRACT(MONTH FROM date),COUNT(*) FROM (
+SELECT EXTRACT(MONTH FROM date) as month,COUNT(*) FROM (
         (SELECT order_no, date
            FROM "order"
         )
@@ -37,5 +37,5 @@ SELECT EXTRACT(MONTH FROM date),COUNT(*) FROM (
         (SELECT order_no, date
            FROM pay NATURAL JOIN "order"
         )
-    )
-    GROUP BY EXTRACT(MONTH FROM date);
+    ) AS paidOrders
+    GROUP BY month;
