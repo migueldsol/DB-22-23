@@ -1,18 +1,24 @@
 --acho que nada funciona lol
 
     --ex 1 precisa ser alterado
-
-SELECT cust_no, name FROM (SELECT cust_no, MAX(total_value) FROM (
-    SELECT cust_no, SUM(qty * price)
-        FROM (customer
-            NATURAL JOIN "order"
-            NATURAL JOIN pay
-            NATURAL JOIN contains
-            JOIN product p on contains.sku = p.sku
-   )
-    GROUP BY cust_no)
-                NATURAL JOIN customer);
-
+SELECT name, cust_no
+FROM(
+    (SELECT cust_no, SUM(qty * price)
+     FROM (customer
+           NATURAL JOIN "order"
+           NATURAL JOIN pay
+           NATURAL JOIN contains
+           JOIN product p ON contains.sku = p.sku)
+     GROUP BY cust_no
+     HAVING SUM(qty * price) >= ALL
+          (SELECT SUM(qty * price) as total_value
+           FROM (customer
+               NATURAL JOIN "order"
+               NATURAL JOIN pay
+               NATURAL JOIN contains
+               JOIN product p ON contains.sku = p.sku) as custOrders
+           GROUP BY custOrders.cust_no)
+     ) AS maxSalesPerCust NATURAL JOIN customer);
 
     --ex2
 SELECT DISTINCT name
