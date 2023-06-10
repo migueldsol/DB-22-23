@@ -1,4 +1,7 @@
-    --ex 1
+--acho que nada funciona lol
+
+    --ex 1 precisa ser alterado
+
 SELECT cust_no, name FROM (SELECT cust_no, MAX(total_value) FROM (
     SELECT cust_no, SUM(qty * price)
         FROM (customer
@@ -17,12 +20,12 @@ SELECT DISTINCT name
     WHERE NOT EXISTS(
         SELECT date
         FROM "order"
-        WHERE date BETWEEN "01/01/2022" AND "31/12/2022"
+        WHERE date BETWEEN '01/01/2022' AND '31/12/2022'
         EXCEPT
         SELECT date
         FROM ("order" O NATURAL JOIN employee e) PR
         WHERE PR.name = EF.name
-                  AND date BETWEEN "01/01/2022" AND "31/12/2022"
+                  AND date BETWEEN '01/01/2022' AND '31/12/2022'
     );
 
     --ex3 seems done

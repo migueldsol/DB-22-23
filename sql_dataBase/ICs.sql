@@ -1,4 +1,8 @@
---A
+--A pode ser usado check?
+
+-- CONSTRAINT check_age CHECK (bdate <= current_date - INTERVAL '18 years')
+
+
 CREATE OR REPLACE FUNCTION chk_employee_age_proc()
     RETURNS TRIGGER AS
     $$
