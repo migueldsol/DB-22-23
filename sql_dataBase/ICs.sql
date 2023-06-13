@@ -21,7 +21,7 @@ CREATE OR REPLACE FUNCTION chk_workplace_specialization_proc()
 
 DROP TRIGGER IF EXISTS chk_workplace_specialization_trigger ON workplace;
 CREATE CONSTRAINT TRIGGER chk_workplace_specialization_trigger
-BEFORE UPDATE OR INSERT ON workplace DEFERRABLE
+AFTER UPDATE OR INSERT ON workplace DEFERRABLE
 FOR EACH ROW EXECUTE PROCEDURE chk_workplace_specialization_proc();
 
 --Verifica se ao adicionar/atualizar um office
@@ -30,7 +30,7 @@ CREATE OR REPLACE FUNCTION chk_office_proc()
     RETURNS TRIGGER AS
     $$
     BEGIN
-        IF (NEW.address IN (SELECT address FROM warehouse))
+        IF (NEW.address IN (SELECT address FROM warehouse)) THEN
             RAISE EXCEPTION 'Workplace is already a Warehouse';
         END IF;
 
@@ -40,7 +40,7 @@ CREATE OR REPLACE FUNCTION chk_office_proc()
 
 DROP TRIGGER IF EXISTS chk_office_trigger ON office;
 CREATE CONSTRAINT TRIGGER chk_office_trigger
-BEFORE INSERT OR UPDATE ON office DEFERRABLE
+AFTER INSERT OR UPDATE ON office DEFERRABLE
 FOR EACH ROW EXECUTE PROCEDURE chk_office_proc();
 
 --Verifica se a adicionar/atualizar um warehouse
@@ -49,7 +49,7 @@ CREATE OR REPLACE FUNCTION chk_warehouse_proc()
     RETURNS TRIGGER AS
     $$
     BEGIN
-        IF (NEW.address IN (SELECT address FROM office))
+        IF (NEW.address IN (SELECT address FROM office)) THEN
             RAISE EXCEPTION 'Workplace is already an Office';
         END IF;
 
@@ -59,8 +59,9 @@ CREATE OR REPLACE FUNCTION chk_warehouse_proc()
 
 DROP TRIGGER IF EXISTS chk_warehouse_trigger ON warehouse;
 CREATE CONSTRAINT TRIGGER chk_warehouse_trigger
-BEFORE UPDATE OR INSERT ON warehouse DEFERRABLE
+AFTER UPDATE OR INSERT ON warehouse DEFERRABLE
 FOR EACH ROW EXECUTE PROCEDURE chk_warehouse_proc();
+
 
     --C
 --verifica que a order tem contains
@@ -78,7 +79,7 @@ END;
 
 DROP TRIGGER IF EXISTS chk_order_contains_trigger on "order";
 CREATE CONSTRAINT TRIGGER chk_order_contains_trigger
-BEFORE UPDATE OR INSERT ON "order" DEFERRABLE
+AFTER UPDATE OR INSERT ON "order" DEFERRABLE
 FOR EACH ROW EXECUTE PROCEDURE chk_order_contains_proc();
 
 --ao apagar uma order apaga também os contains (acho que é opcional)
@@ -87,8 +88,6 @@ CREATE OR REPLACE FUNCTION delete_order_proc()
     $$
 BEGIN
         DELETE FROM contains WHERE order_no = old.order_no;
-END IF;
-
 RETURN NEW;
 END;
     $$ LANGUAGE plpgsql;
@@ -103,8 +102,8 @@ CREATE OR REPLACE FUNCTION chk_delete_contains_proc()
     RETURNS TRIGGER AS
     $$
 BEGIN
-        IF (SELECT COUNT(*) FROM contains WHERE order_no = old.order_no) == 1 THEN 
-            RAISE EXCEPTION 'Order needs to have at least one product.'
+    IF (SELECT COUNT(*) FROM contains WHERE order_no = old.order_no) = 1 THEN 
+        RAISE EXCEPTION 'Order needs to have at least one product.';
 END IF;
 
 RETURN NEW;
@@ -113,6 +112,6 @@ END;
 
 DROP TRIGGER IF EXISTS chk_delete_contains_trigger on contains;
 CREATE CONSTRAINT TRIGGER chk_delete_contains_trigger
-BEFORE UPDATE OR INSERT ON contains DEFERRABLE
+AFTER UPDATE OR INSERT ON contains DEFERRABLE
 FOR EACH ROW EXECUTE PROCEDURE chk_delete_contains_proc();
 
