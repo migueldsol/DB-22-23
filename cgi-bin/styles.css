@@ -1,7 +1,4 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
-
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 
 body {
   display: flex;
@@ -9,12 +6,14 @@ body {
   height: 100vh;
   margin: 0;
   overflow: hidden;
+  font-family: "Poppins";
 }
 
 .sidebar {
   width: 20%;
   height: 100vh;
   padding: 20px;
+  font-family: "Poppins";
   box-sizing: border-box;
   overflow: auto;
   position: relative;
@@ -50,21 +49,29 @@ body {
   height: 100vh;
 }
 .content h1 {
-  font-family: poppins;
+  font-family: "Poppins";
+  font-size: 70px;
+  padding-top: 100px;
   padding-left: 60px;
   padding-bottom: 50px;
+  font-weight: 700;
 }
 
 .boxes {
   display: flex;
-  justify-content: flex-start;
 }
 
 .box:first-child {
   margin-left: 60px;
 }
+
+.box-link:hover .box {
+  filter: brightness(1.15); /* Change color on hover */
+  cursor: pointer; /* Changes cursor to pointer on hover */
+}
+
 .box {
-  margin-right: 80px;
+  margin-right: 20px;
   border-radius: 30px;
   width: 200px;
   height: 200px; /* Set the height of your boxes */
@@ -80,6 +87,7 @@ body {
 .box:last-child {
   margin-right: 0;
 }
+
 .box-text {
   position: absolute;
   bottom: 30px;
@@ -91,14 +99,10 @@ body {
   color: inherit; /* Inherits color from parent */
 }
 
-.box-link:hover .box {
-  background-color: #ddd; /* Change color on hover */
-  cursor: pointer; /* Changes cursor to pointer on hover */
-}
-
 .box-text p {
   margin: 0;
-  line-height: 0.5;
+  margin-top: 20px;
+  line-height: 0.3;
   font-family: "Poppins";
   font-style: normal;
   font-weight: 600;
