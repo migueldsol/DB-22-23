@@ -20,7 +20,7 @@ date_counter = 0
 date_ = date(2022, 1, 1)
 
 print()
-print("\t--orders and payments")
+print("\t--orders, payments and contains")
 print("--customer_0")
 print("--date 2022/1/1")
 for i in range(3650):
@@ -36,9 +36,18 @@ for i in range(3650):
     
     counter += 1
     date_counter += 1
+
+    random_product_1 = random.randint(0,49)
+    random_product_2 = random.randint(50,99)
+    random_qty_1 = random.randint(1,10)
+    random_qty_2 = random.randint(1,10)
     
-    
+    print("START TRANSACTION;")
+    print("SET CONSTRAINTS ALL DEFERRED;")
     print("INSERT INTO \"order\" (cust_no, date, order_no) VALUES ({}, {}, {});".format(customer_id, "\'" + date_.strftime("%Y/%m/%d") + "\'", i))
+    print("INSERT INTO contains (order_no, sku, qty) VALUES ({}, {}, {});".format(i, "\'" + str(random_product_1) + "\'", random_qty_1))
+    print("INSERT INTO contains (order_no, sku, qty) VALUES ({}, {}, {});".format(i, "\'" + str(random_product_2) + "\'", random_qty_2))
+    print("COMMIT;")
     if counter <= 5:
         print("INSERT INTO pay (cust_no, order_no) VALUES ({}, {});".format(customer_id, i))
 
@@ -86,8 +95,11 @@ for i in departments:
 print("\t--workplace, office, warehouse")
 workplace_especialization = ["warehouse","office"]
 for i in range(90):
+    print("START TRANSACTION;")
+    print("SET CONSTRAINTS ALL DEFERRED;")
     print("INSERT INTO workplace (address, lat, long) VALUES ({}, {}, {});".format("\'workplace_" + str(i) + "\'", i, i*2))
     print("INSERT INTO ",workplace_especialization[i%2]," (address) VALUES ({});".format("\'workplace_" + str(i) + "\'"))
+    print("COMMIT;")
 
 print("\t--delivery")
 for i in range(100):

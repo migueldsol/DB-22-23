@@ -1,0 +1,3 @@
+Ao carregar-mos dados para a database, temos que ter em conta as ICs? - sim
+Diminuir tamanho do 3.1
+Triggers em deletes?
