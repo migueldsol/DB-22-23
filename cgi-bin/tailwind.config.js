@@ -5,6 +5,5 @@ module.exports = {
     extend: {},
   },
   plugins: [],
-  purge: ['./**/*.html', './styles.css'],
-}
-
+  purge: ["./**/*.html", "./styles.css"],
+};

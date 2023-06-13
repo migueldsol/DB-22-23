@@ -54,29 +54,30 @@ body {
   padding-left: 60px;
   padding-bottom: 50px;
 }
-
-.boxes {
-  display: flex;
-  justify-content: flex-start;
-}
+.row {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 200px; /* Adjust this value to change the space between rows */
+  }
 
 .box:first-child {
   margin-left: 60px;
 }
 .box {
-  margin-right: 80px;
-  border-radius: 30px;
-  width: 200px;
-  height: 200px; /* Set the height of your boxes */
-  position: relative;
-  background: linear-gradient(
-    161.86deg,
-    #325959 18.52%,
-    #0e8388 53.38%,
-    #cbe4de 97.46%
-  );
-  mix-blend-mode: normal;
-}
+    border-radius: 30px;
+    width: 200px;
+    height: 200px; /* Set the height of your boxes */
+    position: relative;
+    background: linear-gradient(
+      161.86deg,
+      #325959 18.52%,
+      #0e8388 53.38%,
+      #cbe4de 97.46%
+    );
+    mix-blend-mode: normal;
+    margin-right: 100px; /* Adjust this value for space between boxes in a row */
+  }
+  
 .box:last-child {
   margin-right: 0;
 }
