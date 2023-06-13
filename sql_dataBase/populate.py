@@ -8,11 +8,15 @@ for i in range(365):
     print("INSERT INTO customer (name, email, phone, address, cust_no) VALUES ({}, {}, {}, {}, {});".format("\'cust_name_" + str(i) + "\'", "\'cust_email_" + str(i) +"@gmail.com\'", str(i), "\'watever_street_" + str(i) + " 1234-123 " + city[i % 10] + "\'", i))
 
 print("\t--products")
+counter = 0
 for i in range(100):
+    if (counter == 26):
+        counter = 0
     if (i == 0):
-        print("INSERT INTO product (name, description, price, ean, sku) VALUES ({}, {}, 1, {}, {});".format("\'Product_name_" + str(i) + "\'", "\'Description for product" + str(i) + "\'", 100000000 + i, "\'" + str(i) + "\'"))
+        print("INSERT INTO product (name, description, price, ean, sku) VALUES ({}, {}, 1, {}, {});".format("\'A_Product_name_" + str(i) + "\'", "\'Description for product" + str(i) + "\'", 100000000 + i, "\'" + str(i) + "\'"))
     else:
-        print("INSERT INTO product (name, description, price, ean, sku) VALUES ({}, {}, {}, {}, {});".format("\'Product_name_" + str(i) + "\'", "\'Description for product" + str(i) + "\'", i* 2, 100000000 + i, "\'" + str(i) + "\'"))
+        print("INSERT INTO product (name, description, price, ean, sku) VALUES ({}, {}, {}, {}, {});".format("\'" + chr(65 + counter) + "_Product_name_" + str(i) + "\'", "\'Description for product" + str(i) + "\'", i* 2, 100000000 + i, "\'" + str(i) + "\'"))
+    counter += 1
 
 counter = 0
 customer_id = 0 
@@ -50,19 +54,6 @@ for i in range(3650):
     print("COMMIT;")
     if counter <= 5:
         print("INSERT INTO pay (cust_no, order_no) VALUES ({}, {});".format(customer_id, i))
-
-order_id = 0
-print("\t--contains")
-for i in range (3650):
-    random_product_1 = random.randint(0,49)
-    random_product_2 = random.randint(50,99)
-    random_qty_1 = random.randint(1,10)
-    random_qty_2 = random.randint(1,10)
-
-    print("INSERT INTO contains (order_no, sku, qty) VALUES ({}, {}, {});".format(i, "\'" + str(random_product_1) + "\'", random_qty_1))
-    print("INSERT INTO contains (order_no, sku, qty) VALUES ({}, {}, {});".format(i, "\'" + str(random_product_2) + "\'", random_qty_2))
-
-
 
 print("\t--supplier")
 counter = 0
