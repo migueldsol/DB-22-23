@@ -8,19 +8,17 @@
       integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="./styles2.css" />
+    <link rel="stylesheet" href="styles2.css" />
   </head>
   <body>
     <div class="sidebar">
       <a href="Home.html">Home</a>
-      <a href="ManageProducts.html" class="white-link">Products</a>
-      <a href="ManageSuppliers.html">Suppliers</a>
-      <a href="ManageClients.html">Clients</a>
+      <a href="Orders.html" class="white-link">Orders</a>
     </div>
     <div class="content">
       <div class="flex-container">
-        <h1>Alter Price</h1>
-        <a href="EditProduct.html" class="mb-5" style="margin-right: 25px">
+        <h1>Pay Order</h1>
+        <a href="Orders.html" class="mb-5" style="margin-right: 25px">
           <img
             src="icons/back.png"
             alt="Back"
@@ -30,26 +28,13 @@
       </div>
       <form action="">
         <div class="mb-3">
-          <label for="product_sku" class="form-label">SKU</label>
+          <label for="oder_number" class="form-label">Order Number</label>
           <input
             required
             type="number"
             class="form-control"
-            id="product_sku"
-            placeholder="Enter product SKU"
-          />
-          <div id="passwordHelpBlock" class="form-text">
-            The SKU number must at max 25 number's long
-          </div>
-        </div>
-        <div class="mb-3">
-          <label for="product_sku" class="form-label">New Price</label>
-          <input
-            required
-            type="number"
-            class="form-control"
-            id="new_price"
-            placeholder="Enter product's new price"
+            id="order_number"
+            placeholder="Enter order number"
           />
         </div>
         <button type="submit" class="btn btn-primary mt-3">Submit</button>

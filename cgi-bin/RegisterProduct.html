@@ -20,14 +20,15 @@
     <div class="content">
       <div class="flex-container">
         <h1>Register Product</h1>
-        <a
-          href="/cgi-bin/templates/Products.html"
-          class="btn btn-secondary mb-5"
-        >
-          <img src="./icons/Back.png" alt="Back" />
+        <a href="ManageProducts.html" class="mb-5" style="margin-right: 25px">
+          <img
+            src="icons/back.png"
+            alt="Back"
+            style="width: 50px; height: 50px"
+          />
         </a>
       </div>
-      <form action="">
+      <form action="AddProduct.cgi" method="POST">
         <div class="mb-3">
           <label for="product_sku" class="form-label">Sku</label>
           <input
@@ -36,6 +37,7 @@
             class="form-control"
             id="product_sku"
             placeholder="Enter product SKU"
+            name="product_sku"
           />
           <div id="passwordHelpBlock" class="form-text">
             The SKU number must at max 25 number's long
@@ -49,6 +51,7 @@
             type="text"
             class="form-control"
             id="Name"
+            name="Name"
             placeholder="Enter product's Name"
           />
         </div>
@@ -59,6 +62,7 @@
             type="number"
             class="form-control"
             id="Price"
+            name="Price"
             placeholder="Enter product's Price"
           />
         </div>
@@ -66,9 +70,10 @@
           <label for="EAN" class="form-label">EAN</label>
           <input
             required
-            type="email"
+            type="number"
             class="form-control"
             id="EAN"
+            name="EAN"
             placeholder="Enter product's EAN"
           />
         </div>
@@ -80,6 +85,7 @@
             placeholder="Enter product's Description"
             class="form-control"
             id="Description"
+            name="Description"
             rows="3"
           ></textarea>
         </div>

@@ -24,11 +24,11 @@ print("    <div class='content'>")
 
 form = cgi.FieldStorage()
 
-cust_no = form.getvalue("Cust_no")
+tin = form.getvalue("TIN")
 name = form.getvalue("Name")
-email = form.getvalue("Email")
-phone = form.getvalue("Phone")
 address = form.getvalue("Address")
+sku = form.getvalue("SKU")
+date = form.getvalue("Date")
 
 connection = None
 try:
@@ -36,22 +36,28 @@ try:
     connection = psycopg2.connect(login.credentials)
     cursor = connection.cursor()
 
-    add_client = (
-        "INSERT INTO customer "
-        "(cust_no, name, email, phone, address) "
-        "VALUES (%s, %s, %s, %s, %s)"
+    add_supplier = (
+        "INSERT INTO supplier "
+        "(tin, name, address, sku, date) "
+        "VALUES (%(tin)s, %(name)s, %(address)s, %(sku)s, %(date)s)"
     )
 
-    data_client = (cust_no, name, email, phone, address)
+    data_supplier = {
+        "tin": tin,
+        "name": name,
+        "address": address,
+        "sku": sku,
+        "date": date,
+    }
 
     # Insert new client
-    cursor.execute(add_client, data_client)
+    cursor.execute(add_supplier, data_supplier)
 
     # commit the changes
     connection.commit()
 
     cursor.close()
-    print("<h1>Client Added!</h1>")
+    print("<h1>Supplier Added!</h1>")
 except Exception as e:
     # Print errors on the webpage if they occur
     print("<h1>An error occurred.</h1>")

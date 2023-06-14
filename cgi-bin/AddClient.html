@@ -20,19 +20,24 @@
     <div class="content">
       <div class="flex-container">
         <h1>Add Client</h1>
-        <a href="./Clients.html" class="btn btn-secondary mb-5">
-          <img src="../../icons/Back.png" alt="Back" />
+        <a href="ManageClients.html" class="mb-5" style="margin-right: 25px">
+          <img
+            src="icons/back.png"
+            alt="Back"
+            style="width: 50px; height: 50px"
+          />
         </a>
       </div>
       <form action="AddClient.cgi" method="POST">
         <div class="mb-3">
-          <label for="Cust_no" class="form-label">Cust_no</label>
+          <label for="Cust_no" class="form-label">Client Number</label>
           <input
             required
             type="number"
             class="form-control"
             id="Cust_no"
-            placeholder="Enter cutomer's number"
+            name="Cust_no"
+            placeholder="Enter Client's number"
           />
         </div>
         <div class="mb-3">
@@ -43,6 +48,7 @@
             type="text"
             class="form-control"
             id="Name"
+            name="Name"
             placeholder="Enter Client's Name"
           />
         </div>
@@ -53,6 +59,7 @@
             type="email"
             class="form-control"
             id="Email"
+            name="Email"
             placeholder="Enter Client's email"
           />
         </div>
@@ -64,6 +71,7 @@
             type="number"
             class="form-control"
             id="Phone"
+            name="Phone"
             placeholder="Enter Client's Phone"
           />
         </div>
@@ -75,6 +83,7 @@
             type="text"
             class="form-control"
             id="Address"
+            name="Address"
             placeholder="Enter Client's Address"
           />
         </div>

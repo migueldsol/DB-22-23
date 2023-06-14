@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <title>My Web Page</title>
     <link
@@ -13,14 +13,12 @@
   <body>
     <div class="sidebar">
       <a href="Home.html">Home</a>
-      <a href="ManageProducts.html">Products</a>
-      <a href="ManageSuppliers.html" class="white-link">Suppliers</a>
-      <a href="ManageClients.html">Clients</a>
+      <a href="Orders.html" class="white-link">Orders</a>
     </div>
     <div class="content">
       <div class="flex-container">
-        <h1>Add Supplier</h1>
-        <a href="ManageSuppliers.html" class="mb-5" style="margin-right: 25px">
+        <h1>Place Order</h1>
+        <a href="Orders.html" class="mb-5" style="margin-right: 25px">
           <img
             src="icons/back.png"
             alt="Back"
@@ -28,53 +26,27 @@
           />
         </a>
       </div>
-      <form action="AddSupplier.cgi" method="POST">
+      <form action="">
         <div class="mb-3">
-          <label for="TIN" class="form-label">TIN</label>
+          <label for="oder_number" class="form-label">Order Number</label>
           <input
             required
             type="number"
             class="form-control"
-            id="TIN"
-            name="TIN"
-            placeholder="Enter Supplier TIN"
+            id="order_number"
+            placeholder="Enter order number"
           />
         </div>
         <div class="mb-3">
-          <label for="Name" class="form-label">Name</label>
-          <input
-            required
-            maxlength="200"
-            type="text"
-            class="form-control"
-            id="Name"
-            name="Name"
-            placeholder="Enter Supplier's Name"
-          />
-        </div>
-        <div class="mb-3">
-          <label for="Address" class="form-label">Address</label>
-          <input
-            required
-            type="text"
-            class="form-control"
-            id="Address"
-            name="Address"
-            placeholder="Enter Supplier's Address"
-          />
-        </div>
-        <div class="mb-3">
-          <label for="SKU" class="form-label">SKU</label>
+          <label for="client_number" class="form-label">Client Number</label>
           <input
             required
             type="number"
             class="form-control"
-            id="SKU"
-            name="SKU"
-            placeholder="Enter Supplier's product sSKU"
+            id="client"
+            placeholder="Enter client number"
           />
         </div>
-
         <div class="mb-3">
           <label for="Date" class="form-label">Date</label>
           <input
@@ -82,7 +54,6 @@
             type="date"
             class="form-control"
             id="Date"
-            name="Date"
             placeholder="Enter Supplier's SKU"
           />
         </div>
