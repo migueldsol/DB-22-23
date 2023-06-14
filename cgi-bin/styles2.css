@@ -129,3 +129,18 @@ body {
 .form-control textarea {
   height: 100px;
 }
+
+.flex-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-container h1 {
+  flex-grow: 1;
+}
+
+.flex-container .btn {
+  display: flex;
+  align-items: center;
+}
