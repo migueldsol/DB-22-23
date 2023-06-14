@@ -13,12 +13,12 @@
   <body>
     <div class="sidebar">
       <a href="Home.html">Home</a>
-      <a href="ManageProducts.html" class="white-link">Products</a>
+      <a href="ManageProducts.html">Products</a>
       <a href="ManageSuppliers.html">Suppliers</a>
-      <a href="ManageClients.html">Clients</a>
+      <a href="ManageClients.html" class="white-link">Clients</a>
     </div>
     <div class="content">
-      <h1>Register Product</h1>
+      <h1>Add Cient</h1>
       <div class="mb-2">
         <label for="product_sku" class="form-label">SKU</label>
         <input
@@ -41,32 +41,31 @@
         />
       </div>
       <div class="mb-2">
-        <label for="exampleFormControlInput1" class="form-label">EAN (Optional)</label>
+        <label for="exampleFormControlInput1" class="form-label">TIN</label>
         <input
           type="number"
           class="form-control"
-          id="EAN"
+          id="TIN"
         />
         <div id="passwordHelpBlock" class="form-text">
-          The EAN number must at max 13 number's long
+          The TIN number must at max 20 number's long
         </div>
       </div>
       <div class="mb-2">
-        <label for="exampleFormControlInput1" class="form-label">Price</label>
+        <label for="exampleFormControlInput1" class="form-label">Adress</label>
         <input
-          type="number"
+          type="text"
           class="form-control"
-          id="Price"
-          placeholder="€"
+          id="Adress"
         />
       </div>
       <div class="mb-2">
-        <label for="exampleFormControlTextarea1" class="form-label">Description</label>
-        <textarea
+        <label for="exampleFormControlTextarea1" class="form-label">Date</label>
+        <input
+          type="date"
           class="form-control"
-          id="Description"
-          rows="3"
-        ></textarea>
+          id="Adress"
+        />
       </div>
     </div>
   </body>
