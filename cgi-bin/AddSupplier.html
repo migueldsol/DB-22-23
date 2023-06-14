@@ -8,22 +8,19 @@
       integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="../styles2.css" />
+    <link rel="stylesheet" href="styles2.css" />
   </head>
   <body>
     <div class="sidebar">
       <a href="Home.html">Home</a>
       <a href="ManageProducts.html">Products</a>
-      <a href="ManageSuppliers.html">Suppliers</a>
-      <a href="ManageClients.html" class="white-link">Clients</a>
+      <a href="ManageSuppliers.html" class="white-link">Suppliers</a>
+      <a href="ManageClients.html">Clients</a>
     </div>
     <div class="content">
       <div class="flex-container">
-        <h1>Add Client</h1>
-        <a
-          href="/cgi-bin/templates/Clients.html"
-          class="btn btn-secondary mb-5"
-        >
+        <h1>Add Supplier</h1>
+        <a href="./Suppliers.html" class="btn btn-secondary mb-5">
           <img src="../../icons/Back.png" alt="Back" />
         </a>
       </div>
@@ -35,7 +32,7 @@
             type="number"
             class="form-control"
             id="TIN"
-            placeholder="Enter Client TIN"
+            placeholder="Enter Supplier TIN"
           />
         </div>
         <div class="mb-3">
@@ -46,7 +43,7 @@
             type="text"
             class="form-control"
             id="Name"
-            placeholder="Enter Client's Name"
+            placeholder="Enter Supplier's Name"
           />
         </div>
         <div class="mb-3">
@@ -56,7 +53,7 @@
             type="number"
             class="form-control"
             id="Address"
-            placeholder="Enter Client's Address"
+            placeholder="Enter Supplier's Address"
           />
         </div>
         <div class="mb-3">
@@ -66,7 +63,7 @@
             type="number"
             class="form-control"
             id="SKU"
-            placeholder="Enter Client's SKU"
+            placeholder="Enter Supplier's SKU"
           />
         </div>
 
@@ -77,7 +74,7 @@
             type="date"
             class="form-control"
             id="Date"
-            placeholder="Enter Client's SKU"
+            placeholder="Enter Supplier's SKU"
           />
         </div>
         <button type="submit" class="btn btn-primary mt-3">Submit</button>

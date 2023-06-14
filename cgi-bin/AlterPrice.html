@@ -8,7 +8,7 @@
       integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="../styles2.css" />
+    <link rel="stylesheet" href="./styles2.css" />
   </head>
   <body>
     <div class="sidebar">
@@ -18,7 +18,7 @@
       <a href="ManageClients.html">Clients</a>
     </div>
     <div class="content">
-      <h1>Remove Product</h1>
+      <h1>Alter Price</h1>
       <div class="mb-2">
         <label for="product_sku" class="form-label">SKU</label>
         <input
@@ -34,30 +34,26 @@
       <div class="mb-2">
         <label for="Name" class="form-label">Name</label>
         <input
-          type="text"
+          type="email"
           class="form-control"
           id="Name"
           placeholder="Enter product's Name"
         />
       </div>
       <div class="mb-2">
-        <label for="exampleFormControlInput1" class="form-label">EAN (Optional)</label>
-        <input
-          type="number"
-          class="form-control"
-          id="EAN"
-        />
+        <label for="exampleFormControlInput1" class="form-label"
+          >EAN (Optional)</label
+        >
+        <input type="number" class="form-control" id="EAN" />
         <div id="passwordHelpBlock" class="form-text">
           The EAN number must at max 13 number's long
         </div>
       </div>
       <div class="mb-2">
-        <label for="exampleFormControlTextarea1" class="form-label">New Description</label>
-        <textarea
-          class="form-control"
-          id="Description"
-          rows="3"
-        ></textarea>
+        <label for="exampleFormControlInput1" class="form-label"
+          >New Price</label
+        >
+        <input type="number" class="form-control" id="Price" placeholder="€" />
       </div>
     </div>
   </body>
