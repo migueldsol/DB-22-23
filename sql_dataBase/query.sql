@@ -1,6 +1,4 @@
---acho que nada funciona lol
-
-    --ex 1 precisa ser alterado
+    --ex 1
 SELECT name, cust_no
 FROM(
     (SELECT cust_no, SUM(qty * price)
@@ -34,7 +32,7 @@ SELECT DISTINCT name
                   AND date BETWEEN '01/01/2022' AND '31/12/2022'
     );
 
-    --ex3 seems done
+    --ex3
 SELECT EXTRACT(MONTH FROM date) as month,COUNT(*) FROM (
         (SELECT order_no, date
            FROM "order"
