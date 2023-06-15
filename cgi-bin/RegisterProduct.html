@@ -15,7 +15,7 @@
       <a href="Home.html">Home</a>
       <a href="ManageProducts.html" class="white-link">Products</a>
       <a href="ManageSuppliers.html">Suppliers</a>
-      <a href="ManageClients.html">Clients</a>
+      <a href="ManageCustomers.html">Customers</a>
     </div>
     <div class="content">
       <div class="flex-container">
@@ -29,68 +29,146 @@
         </a>
       </div>
       <form action="AddProduct.cgi" method="POST">
-        <div class="mb-3">
-          <label for="product_sku" class="form-label">Sku</label>
-          <input
-            required
-            type="number"
-            class="form-control"
-            id="product_sku"
-            placeholder="Enter product SKU"
-            name="product_sku"
-          />
-          <div id="passwordHelpBlock" class="form-text">
-            The SKU number must at max 25 number's long
-          </div>
-        </div>
-        <div class="mb-3">
-          <label for="Name" class="form-label">Name</label>
-          <input
-            required
-            maxlength="200"
-            type="text"
-            class="form-control"
-            id="Name"
-            name="Name"
-            placeholder="Enter product's Name"
-          />
-        </div>
-        <div class="mb-3">
-          <label for="Price" class="form-label">Price</label>
-          <input
-            required
-            type="number"
-            class="form-control"
-            id="Price"
-            name="Price"
-            placeholder="Enter product's Price"
-          />
-        </div>
-        <div class="mb-3">
-          <label for="EAN" class="form-label">EAN</label>
-          <input
-            required
-            type="number"
-            class="form-control"
-            id="EAN"
-            name="EAN"
-            placeholder="Enter product's EAN"
-          />
-        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <h2 class="text-center mt-5">Product</h2>
+            <div class="mb-3">
+              <label for="product_sku" class="form-label">Sku</label>
+              <input
+                required
+                type="number"
+                class="form-control"
+                id="product_sku"
+                placeholder="Enter product SKU"
+                name="product_sku"
+                oninput="copyText()"
+              />
+              <div id="passwordHelpBlock" class="form-text">
+                The SKU number must at max 25 number's long
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="Name" class="form-label">Name</label>
+              <input
+                required
+                maxlength="200"
+                type="text"
+                class="form-control"
+                id="Name"
+                name="product_name"
+                placeholder="Enter product's Name"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="Price" class="form-label">Price</label>
+              <input
+                required
+                type="number"
+                class="form-control"
+                id="Price"
+                name="product_price"
+                placeholder="Enter product's Price"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="EAN" class="form-label">EAN</label>
+              <input
+                required
+                type="number"
+                class="form-control"
+                id="EAN"
+                name="product_ean"
+                placeholder="Enter product's EAN"
+              />
+            </div>
 
-        <div class="mb-3">
-          <label for="Description" class="form-label">Description</label>
-          <textarea
-            required
-            placeholder="Enter product's Description"
-            class="form-control"
-            id="Description"
-            name="Description"
-            rows="3"
-          ></textarea>
+            <div class="mb-3">
+              <label for="Description" class="form-label">Description</label>
+              <textarea
+                required
+                placeholder="Enter product's Description"
+                class="form-control"
+                id="Description"
+                name="product_description"
+                rows="3"
+              ></textarea>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <h2 class="text-center mt-5">Supplier</h2>
+            <div class="mb-3">
+              <label for="TIN" class="form-label">TIN</label>
+              <input
+                required
+                type="number"
+                class="form-control"
+                id="TIN"
+                name="supplier_tin"
+                placeholder="Enter Supplier TIN"
+              />
+              <div id="passwordHelpBlock" class="form-text">
+                The TIN number must at max be 20 number's long
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="Name" class="form-label">Name</label>
+              <input
+                required
+                maxlength="200"
+                type="text"
+                class="form-control"
+                id="Name"
+                name="supplier_name"
+                placeholder="Enter Supplier's Name"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="Address" class="form-label">Address</label>
+              <input
+                required
+                type="text"
+                class="form-control"
+                id="Address"
+                name="supplier_address"
+                placeholder="Enter Supplier's Address"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="SKU" class="form-label">SKU</label>
+              <input
+                required
+                type="number"
+                class="form-control"
+                id="SKU"
+                name="supplier_sku"
+                placeholder="Enter Supplier's product SKU"
+                readonly
+                oninput="copyText()"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="Date" class="form-label">Date</label>
+              <input
+                required
+                type="date"
+                class="form-control"
+                id="Date"
+                name="supplier_date"
+                placeholder="Enter Supplier's SKU"
+              />
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary mt-3">Submit</button>
         </div>
-        <button type="submit" class="btn btn-primary mt-3">Submit</button>
       </form>
     </div>
+    <script>
+      function copyText() {
+        var text = document.getElementById("product_sku").value;
+        document.getElementById("SKU").value = text;
+      }
+    </script>
   </body>
 </html>

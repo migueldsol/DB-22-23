@@ -37,6 +37,8 @@ body {
 }
 
 .content {
+  display: flex;
+  flex-direction: column;
   border-top: 10px solid #2c3333;
   border-bottom: 10px solid #2c3333;
   border-right: 10px solid #2c3333;
@@ -52,8 +54,17 @@ body {
   font-family: "Poppins";
   font-size: 70px;
   padding-left: 60px;
-  padding-bottom: 50px;
+  padding-bottom: 0px;
   font-weight: 700;
+  flex-shrink: 1;
+}
+
+.table-container {
+  padding: 30px;
+  overflow-x: auto;
+  overflow-y: auto;
+  box-sizing: border-box;
+  flex-grow: 1;
 }
 
 .boxes {

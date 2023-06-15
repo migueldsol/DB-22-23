@@ -17,15 +17,15 @@ print("  </head>")
 print("  <body>")
 print('    <div class="sidebar">')
 print('      <a href="Home.html">Home</a>')
-print('      <a href="ManageProducts.html" class="white-link">Products</a>')
-print('      <a href="ManageSuppliers.html">Suppliers</a>')
+print('      <a href="ManageProducts.html">Products</a>')
+print('      <a href="ManageSuppliers.html" class="white-link">Suppliers</a>')
 print('      <a href="ManageCustomers.html">Customers</a>')
 print("    </div>")
 print("    <div class='content'>")
 
 form = cgi.FieldStorage()
 
-sku = form.getvalue("product_sku")
+tin = form.getvalue("tin")
 
 connection = None
 try:
@@ -33,14 +33,14 @@ try:
     connection = psycopg2.connect(login.credentials)
     cursor = connection.cursor()
 
-    delete_product = "DELETE FROM product " "WHERE sku = %s"
+    delete_product = "DELETE FROM Supplier " "WHERE Supplier = %s"
 
     cursor.execute(delete_product, (sku,))
 
     connection.commit()
 
     cursor.close()
-    print("<h1>Product Removed!</h1>")
+    print("<h1>Supplier Removed!</h1>")
 except Exception as e:
     # Print errors on the webpage if they occur
     print("<h1>An error occurred.</h1>")

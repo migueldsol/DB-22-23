@@ -21,7 +21,8 @@ print("    <div class='mb-3 header'>")
 print("      <h2>Name:</h2>")
 print("    </div>")
 print("    <div class='content mb-5'>")
-print("      <select class='form-control select2' id='mySelect2'>")
+print(" <form action='Orders.cgi' method='post'>")
+print("      <select class='form-control select2' id='mySelect2' name = 'customer'>")
 
 connection = None
 
@@ -43,7 +44,8 @@ finally:
         connection.close()
 print("      </select>")
 print("    </div>")
-print("    <a href='Orders.html' class='btn btn-primary'>Submit</a>")
+print("    <button type='submit' class='btn btn-primary'>Submit</button>")
+print("  </form>")
 print(
     "    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>"
 )

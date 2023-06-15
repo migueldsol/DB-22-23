@@ -18,7 +18,7 @@ print("<div class='sidebar'>")
 print("      <a href='Home.html'>Home</a>")
 print("      <a href='ManageProducts.html'>Products</a>")
 print("      <a href='ManageSuppliers.html'>Suppliers</a>")
-print("      <a href='ManageClients.html' class='white-link'>Clients</a>")
+print("      <a href='ManageCustomers.html' class='white-link'>Customers</a>")
 print("    </div>")
 print("    <div class='content'>")
 
@@ -50,7 +50,7 @@ try:
         "date": date,
     }
 
-    # Insert new client
+    # Insert new Customer
     cursor.execute(add_supplier, data_supplier)
 
     # commit the changes

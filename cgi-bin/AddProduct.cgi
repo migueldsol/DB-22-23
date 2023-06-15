@@ -18,17 +18,23 @@ print("<div class='sidebar'>")
 print("      <a href='Home.html'>Home</a>")
 print("      <a href='ManageProducts.html'>Products</a>")
 print("      <a href='ManageSuppliers.html'>Suppliers</a>")
-print("      <a href='ManageClients.html' class='white-link'>Clients</a>")
+print("      <a href='ManageCustomers.html' class='white-link'>Customers</a>")
 print("    </div>")
 print("    <div class='content'>")
 
 form = cgi.FieldStorage()
 
-sku = form.getvalue("product_sku")
-name = form.getvalue("Name")
-price = form.getvalue("Price")
-ean = form.getvalue("EAN")
-description = form.getvalue("Description")
+product_sku = form.getvalue("product_sku")
+product_name = form.getvalue("product_name")
+product_price = form.getvalue("product_price")
+product_ean = form.getvalue("product_ean")
+product_description = form.getvalue("product_description")
+
+supplier_tin = form.getvalue("supplier_tin")
+supplier_name = form.getvalue("supplier_name")
+supplier_address = form.getvalue("supplier_address")
+supplier_sku = form.getvalue("supplier_sku")
+supplier_date = form.getvalue("supplier_date")
 
 
 connection = None
@@ -44,15 +50,32 @@ try:
     )
 
     data_product = {
-        "sku": sku,
-        "name": name,
-        "description": description,
-        "ean": ean,
-        "price": price,
+        "sku": product_sku,
+        "name": product_name,
+        "description": product_description,
+        "ean": product_ean,
+        "price": product_price,
     }
 
-    # Insert new client
+    add_supplier = """
+        INSERT INTO supplier
+        (tin, name, address, sku, date)
+        VALUES (%(tin)s, %(name)s, %(address)s, %(sku)s, %(date)s)
+        """
+
+    data_supplier = {
+        "tin": supplier_tin,
+        "name": supplier_name,
+        "address": supplier_address,
+        "sku": supplier_sku,
+        "date": supplier_date,
+    }
+
+    # Insert new product
     cursor.execute(add_product, data_product)
+
+    # Insert new supplier
+    cursor.execute(add_supplier, data_supplier)
 
     # commit the changes
     connection.commit()

@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 import psycopg2, cgi
+from psycopg2 import errorcodes
 import login
 
 print("Content-Type: text/html\n\n")
@@ -18,7 +19,7 @@ print("<div class='sidebar'>")
 print("      <a href='Home.html'>Home</a>")
 print("      <a href='ManageProducts.html'>Products</a>")
 print("      <a href='ManageSuppliers.html'>Suppliers</a>")
-print("      <a href='ManageClients.html' class='white-link'>Clients</a>")
+print("      <a href='ManageCustomers.html' class='white-link'>Customers</a>")
 print("    </div>")
 print("    <div class='content'>")
 
@@ -39,10 +40,16 @@ try:
     add_client = (
         "INSERT INTO customer "
         "(cust_no, name, email, phone, address) "
-        "VALUES (%s, %s, %s, %s, %s)"
+        "VALUES (%(cust_no)s, %(name)s, %(email)s, %(phone)s, %(address)s)"
     )
 
-    data_client = (cust_no, name, email, phone, address)
+    data_client = {
+        "cust_no": cust_no,
+        "name": name,
+        "email": email,
+        "phone": phone,
+        "address": address,
+    }
 
     # Insert new client
     cursor.execute(add_client, data_client)
@@ -51,11 +58,24 @@ try:
     connection.commit()
 
     cursor.close()
-    print("<h1>Client Added!</h1>")
+    print("<h1>Customer Added!</h1>")
+except psycopg2.IntegrityError as e:
+    error_code = e.pgcode
+    if error_code == errorcodes.UNIQUE_VIOLATION:
+        error_message = e.diag.message_detail
+        attribute_start = error_message.index("(") + 1
+        attribute_end = error_message.index(")")
+
+        attribute = error_message[attribute_start:attribute_end]
+        print("<h1>An error occurred.</h1>")
+        print("<p>{} already exists </p>".format(attribute))
+        # Handle unique violation error with the specific attribute
+    else:
+        print("IntegrityError occurred:", str(e))
 except Exception as e:
     # Print errors on the webpage if they occur
     print("<h1>An error occurred.</h1>")
-    print("<p>{}</p>".format(e))
+    print("<p>Unknown Error</p>")
 finally:
     if connection is not None:
         connection.close()

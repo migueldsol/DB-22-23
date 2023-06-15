@@ -13,12 +13,14 @@
   <body>
     <div class="sidebar">
       <a href="Home.html">Home</a>
-      <a href="Orders.html" class="white-link">Orders</a>
+      <a href="ManageProducts.html">Products</a>
+      <a href="ManageSuppliers.html">Suppliers</a>
+      <a href="ManageCustomers.html" class="white-link">Customers</a>
     </div>
     <div class="content">
       <div class="flex-container">
-        <h1>Pay Order</h1>
-        <a href="Orders.html" class="mb-5" style="margin-right: 25px">
+        <h1>Remove Customer</h1>
+        <a href="ManageCustomers.html" class="mb-5" style="margin-right: 25px">
           <img
             src="icons/back.png"
             alt="Back"
@@ -26,15 +28,16 @@
           />
         </a>
       </div>
-      <form action="">
+      <form action="AddCustomer.cgi" method="POST">
         <div class="mb-3">
-          <label for="oder_number" class="form-label">Order Number</label>
+          <label for="Cust_no" class="form-label">Cust_no</label>
           <input
             required
             type="number"
             class="form-control"
-            id="order_number"
-            placeholder="Enter order number"
+            id="Cust_no"
+            name="Cust_no"
+            placeholder="Enter Customer's number"
           />
         </div>
         <button type="submit" class="btn btn-primary mt-3">Submit</button>
