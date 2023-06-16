@@ -33,7 +33,9 @@ try:
     connection = psycopg2.connect(login.credentials)
     cursor = connection.cursor()
 
-    delete_product = "DELETE FROM product " "WHERE sku = %s"
+    delete_product = (
+    "DELETE FROM product " "WHERE sku = %s"
+    )
 
     cursor.execute(delete_product, (sku,))
 

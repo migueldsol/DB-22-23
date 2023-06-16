@@ -25,7 +25,16 @@ print("      <a href='ManageSuppliers.html'>Suppliers</a>")
 print("      <a href='ManageCustomers.html'>Customers</a>")
 print("    </div>")
 print("    <div class='content'>")
-print("      <h1>Products</h1>")
+print("      <div class='flex-container'>")
+print('        <h1>Products</h1>')
+print('        <a href="ManageProducts.html" class="mb-5" style="margin-right: 25px">')
+print('          <img')
+print('            src="icons/back.png"')
+print('            alt="Back"')
+print('            style="width: 50px; height: 50px"')
+print('          />')
+print('        </a>')
+print('      </div>')
 print("      <div class='table-responsive'>")
 print("        <table id='myTable' class='table table-striped table-bordered'>")
 print("          <thead>")
@@ -54,9 +63,9 @@ try:
             # The string has the {}, the variables inside format() will replace the {}
             print('<td class="text-center">{}</td>'.format(value))
         print("              <td class='text-center'>")
-        print("                <form action='EditProduct.html' method='POST'>")
+        print("                <form action='EditProduct.cgi' method='POST'>")
         print(
-            "                  <input type='hidden' name='cust_no' value='{}' />".format(
+            "                  <input type='hidden' name='sku' value='{}' />".format(
                 row[0]
             )
         )
