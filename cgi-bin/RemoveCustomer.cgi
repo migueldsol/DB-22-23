@@ -18,15 +18,15 @@ print("  </head>")
 print("  <body>")
 print('    <div class="sidebar">')
 print('      <a href="Home.html">Home</a>')
-print('      <a href="ManageProducts.html" class="white-link">Products</a>')
+print('      <a href="ManageProducts.html">Products</a>')
 print('      <a href="ManageSuppliers.html">Suppliers</a>')
-print('      <a href="ManageCustomers.html">Customers</a>')
+print('      <a href="ManageCustomers.html" class="white-link">Customers</a>')
 print("    </div>")
 print("    <div class='content'>")
 
 form = cgi.FieldStorage()
 
-sku = form.getvalue("product_sku")
+cust_no = form.getvalue("cust_no")
 
 connection = None
 try:
@@ -34,17 +34,15 @@ try:
     connection = psycopg2.connect(login.credentials)
     cursor = connection.cursor()
 
+    delete_supplier_tin = """DELETE FROM supplier WHERE tin = %s"""
+
     delete_product = """DELETE FROM product WHERE sku = %s"""
 
     delete_contains_order_no = """DELETE FROM contains WHERE order_no = %s"""
 
-    delete_contains_order_no_and_sku = (
-        """DELETE FROM contains WHERE order_no = %s AND sku = %s"""
-    )
-
     delete_order = """DELETE FROM "order" WHERE order_no = %s"""
 
-    delete_supplier = """DELETE FROM supplier WHERE sku = %s"""
+    delete_supplier_sku = """DELETE FROM supplier WHERE sku = %s"""
 
     select_supplier_with_sku = """SELECT tin FROM supplier WHERE sku = %s"""
 
@@ -60,43 +58,40 @@ try:
 
     count_contains_from_order = """SELECT COUNT(*) FROM contains WHERE order_no = %s"""
 
-    cursor.execute(select_supplier_with_sku, (sku,))  # gets the suppliers
+    # elim order
+    cursor.execute(
+        """SELECT order_no FROM "order" NATURAL JOIN customer WHERE cust_no = %s""",
+        (cust_no,),
+    )
+    orders_of_customer = cursor.fetchall()
 
-    supplier_tins = cursor.fetchall()
+    for order in orders_of_customer:
+        cursor.execute("""DELETE FROM pay WHERE order_no = %s""", (order[0],))
+        cursor.execute("""DELETE FROM process WHERE order_no = %s""", (order[0],))
 
-    for i in supplier_tins:
-        cursor.execute(delete_delivery, (i,))  # deletes the deliverys
-
-    cursor.execute(delete_supplier, (sku,))  # deletes the suppliers
-
-    cursor.execute(select_order_with_sku, (sku,))
-
-    orders_with_sku = cursor.fetchall()
-
-    for i in orders_with_sku:  # goes to each order with sku
-        cursor.execute(count_contains_from_order, (i,))
+        cursor.execute(count_contains_from_order, (order[0],))
 
         contains_in_order = cursor.fetchall()
-        print("<p>Tenho que remover</p>")
 
-        if contains_in_order[0][0] == 1:
+        if contains_in_order[0] == 1:  # if only 1 contains need to remove order
             cursor.execute(start_transaction)  # starts transaction
 
-            cursor.execute(delete_contains_order_no, (i[0],))  # deletes contains
+            cursor.execute(delete_contains_order_no, (order[0],))  # deletes contains
 
-            cursor.execute(delete_pay, (i[0],))
+            cursor.execute(delete_pay, (order[0],))
 
-            cursor.execute(delete_order, (i[0],))  # deletes the order
+            cursor.execute(delete_order, (order[0],))  # deletes the order
 
             cursor.execute("COMMIT;")
         else:
-            cursor.execute(delete_contains_order_no_and_sku, (i[0], sku))
+            cursor.execute(delete_contains_order_no, (order[0],))
 
-    cursor.execute(delete_product, (sku,))
+        cursor.execute("""DELETE FROM "order" WHERE order_no = %s""", (order[0],))
+    cursor.execute("""DELETE FROM customer WHERE cust_no = %s""", (cust_no,))
     connection.commit()
-
     cursor.close()
-    print("<h1>Product with sku {} Removed!</h1>".format(sku))
+    print("<h1>Customer Removed!</h1>")
+
 
 except psycopg2.InternalError as e:
     error_code = e.pgcode
@@ -113,7 +108,6 @@ except Exception as e:
 finally:
     if connection is not None:
         connection.close()
-
 print("<div>")
 print("  </body>")
 print("</html>")

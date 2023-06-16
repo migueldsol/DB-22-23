@@ -34,7 +34,7 @@ print('    <div class="content">')
 try:
     connection = psycopg2.connect(login.credentials)
     cursor = connection.cursor()
-    query = "SELECT price FROM product WHERE product.sku = %s"
+    query = "SELECT description FROM product WHERE product.sku = %s"
     cursor.execute(query, (product_sku,))
     result = cursor.fetchone()
 except Exception as e:
@@ -44,33 +44,40 @@ finally:
     if connection is not None:
         connection.close()
 print('      <div class="flex-container">')
-print("        <h1>Alter Price</h1>")
-print('        <a href="EditProduct.html" class="mb-5" style="margin-right: 25px">')
+print("        <h1>Alter Description</h1>")
+print('        <a href="EditProduct.cgi" class="mb-5" style="margin-right: 25px">')
 print(
     '          <img src="icons/back.png" alt="Back" style="width: 50px; height: 50px" />'
 )
 print("        </a>")
-print("      </div>")
-print('      <div class="mb-3">')
-print('        <label for="product_sku" class="form-label">Old Price</label>')
+print("</div>")
+print('<div class="mb-3">')
+print('        <label for="product_sku" class="form-label">Old Description</label>')
+print("  <textarea")
+print("    readonly")
+print('    class="form-control"')
+print('    rows="3"')
+print("  >{}</textarea>".format(result[0]))
+print("</div>")
+print('      <form action="AlterDescriptionCheck.cgi" method="post">')
+print('<div class="mb-3">')
 print(
-    '        <input readonly type="number" class="form-control" id="product_sku" value = {} />'.format(
-        result[0]
-    )
+    '          <label for="new_description" class="form-label">New Description</label>'
 )
-print("      </div>")
-print('      <form action="AlterPriceCheck.cgi" method="post">')
-print('        <div class="mb-3">')
-print('          <label for="new_price" class="form-label">New Price</label>')
-print(
-    '          <input required type="number" class="form-control" id="new_price" name="new_price" placeholder="Enter product\'s new price" />'
-)
+print("  <textarea")
+print("    required")
+print('    placeholder="Enter product\'s Description"')
+print('    class="form-control"')
+print('    id="new_escription"')
+print('    name="new_description"')
+print('    rows="3"')
+print("  ></textarea>")
+print("</div>")
 print(
     '          <input required type="hidden" name="product_sku" value = {}>'.format(
         product_sku
     )
 )
-print("        </div>")
 print('        <button type="submit" class="btn btn-primary mt-3">Submit</button>')
 print("      </form>")
 print("    </div>")

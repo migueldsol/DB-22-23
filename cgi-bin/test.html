@@ -20,7 +20,7 @@
     <div class="content">
       <div class="flex-container">
         <h1>Alter Description</h1>
-        <a href="EditProduct.html" class="mb-5" style="margin-right: 25px">
+        <a href="EditProduct.cgi" class="mb-5" style="margin-right: 25px">
           <img
             src="icons/back.png"
             alt="Back"
@@ -28,31 +28,27 @@
           />
         </a>
       </div>
-      <form action="">
+      <div class="mb-3">
+        <label for="product_sku" class="form-label">Old Description</label>
+        <label for="Description" class="form-label">Description</label>
+        <textarea readonly value="{0}" class="form-control" rows="3"></textarea>
+      </div>
+      <form action="AlterPriceCheck.cgi" method="post">
         <div class="mb-3">
-          <label for="product_sku" class="form-label">SKU</label>
-          <input
-            required
-            type="number"
-            class="form-control"
-            id="product_sku"
-            placeholder="Enter product SKU"
-          />
-          <div id="passwordHelpBlock" class="form-text">
-            The SKU number must at max 25 number's long
-          </div>
-        </div>
-        <div class="mb-3">
-          <label for="Description" class="form-label">New Description</label>
+          <label for="new_description" class="form-label"
+            >New Description</label
+          >
+          <label for="Description" class="form-label">Description</label>
           <textarea
             required
-            placeholder="Enter product's new description"
+            placeholder="Enter product's Description"
             class="form-control"
-            id="Description"
+            id="new_description"
+            name="new_description"
             rows="3"
           ></textarea>
         </div>
-        <button type="submit" class="btn btn-primary mt-3">Submit</button>
+        <input required type="hidden" name="product_sku" value="{1}" />
       </form>
     </div>
   </body>
