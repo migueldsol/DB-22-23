@@ -1,4 +1,5 @@
-Ao carregar-mos dados para a database, temos que ter em conta as ICs? - sim
-Diminuir tamanho do 3.1
-Triggers em deletes?
-Usar views para as ICs?
+***Triggers em deletes? *******************************************
+Alterar o estado da database com triggers? -> não
+***OLAP -> quando eles dizem globalmente, por cidade, ...; isso significa que eles querem ver estas cenas?
+Temos que apagar contains ao apagar produtos? -> cenas destas
+***Indices
