@@ -16,6 +16,6 @@ FROM	(
 				WHERE year = '2022'
 				GROUP BY month, day_of_month, day_of_week
 			) as FOO
-GROUP BY ROLLUP(month, day_of_week);
+GROUP BY GROUPING SETS ((), (month), (day_of_week));
 
 
