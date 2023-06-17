@@ -63,9 +63,9 @@ try:
         """SELECT order_no FROM "order" NATURAL JOIN customer WHERE cust_no = %s""",
         (cust_no,),
     )
-    orders_of_customer = cursor.fetchall()
+    orders_of_customer = cursor.fetchall()          #selects the orders of the customer
 
-    for order in orders_of_customer:
+    for order in orders_of_customer:                #deletes the pay and process of the orders
         cursor.execute("""DELETE FROM pay WHERE order_no = %s""", (order[0],))
         cursor.execute("""DELETE FROM process WHERE order_no = %s""", (order[0],))
 
@@ -73,20 +73,14 @@ try:
 
         contains_in_order = cursor.fetchall()
 
-        if contains_in_order[0] == 1:  # if only 1 contains need to remove order
-            cursor.execute(start_transaction)  # starts transaction
+        cursor.execute(start_transaction)  # starts transaction
 
-            cursor.execute(delete_contains_order_no, (order[0],))  # deletes contains
+        cursor.execute(delete_contains_order_no, (order[0],))  # deletes contains
 
-            cursor.execute(delete_pay, (order[0],))
+        cursor.execute(delete_order, (order[0],))  # deletes the order
 
-            cursor.execute(delete_order, (order[0],))  # deletes the order
+        cursor.execute("COMMIT;")
 
-            cursor.execute("COMMIT;")
-        else:
-            cursor.execute(delete_contains_order_no, (order[0],))
-
-        cursor.execute("""DELETE FROM "order" WHERE order_no = %s""", (order[0],))
     cursor.execute("""DELETE FROM customer WHERE cust_no = %s""", (cust_no,))
     connection.commit()
     cursor.close()

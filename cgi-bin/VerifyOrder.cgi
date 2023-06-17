@@ -38,9 +38,6 @@ try:
     cursor.execute("""SELECT MAX(order_no) FROM "order" """)
     max_order_no = cursor.fetchone()[0]
 
-    print("<p>{} max_order_no </p>".format(max_order_no))
-    print("<p>form_keys {}</p>".format(form.keys()))
-
     flag = False
 
     for sku in form.keys():
@@ -49,7 +46,13 @@ try:
 
         product_qty = form.getvalue(sku)
 
-        print("<p>sku{}, product_qt{} </p>".format(sku, product_qty))
+        date_add = {
+            "cust_no" : cust_no,
+            "order_no" : max_order_no + 1,
+            "date" : date,
+            "sku" : sku,
+            "product_qty" : product_qty
+        }
 
         if not flag:
             cursor.execute(
@@ -58,19 +61,20 @@ try:
             )
 
             cursor.execute(
-                """INSERT INTO "order" (cust_no, order_no, date) VALUES (%s, %s, %s)""",
-                (cust_no, max_order_no + 1, date),
+                """INSERT INTO "order" (cust_no, order_no, date) VALUES (%(cust_no)s, %(order_no)s, %(date)s)""",
+                date_add
             )
 
             cursor.execute(
-                """INSERT INTO contains (order_no, sku, qty) VALUES (%s, %s ,%s)""",
-                (max_order_no + 1, sku, product_qty),
+                """INSERT INTO contains (order_no, sku, qty) VALUES (%(order_no)s, %(sku)s ,%(product_qty)s)""",
+                date_add
             )
             cursor.execute("COMMIT;")
+            flag = True
         else:
             cursor.execute(
-                """INSERT INTO contains (order_no, sku, qty) VALUES (%s, %s, %s)""",
-                (max_order_no + 1, sku, product_qty),
+                """INSERT INTO contains (order_no, sku, qty) VALUES (%(order_no)s, %(sku)s, %(product_qty)s)""",
+                date_add
             )
 
     # commit the changes

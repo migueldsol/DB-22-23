@@ -34,7 +34,6 @@ product_description = form.getvalue("product_description")
 supplier_tin = form.getvalue("supplier_tin")
 supplier_name = form.getvalue("supplier_name")
 supplier_address = form.getvalue("supplier_address")
-supplier_sku = form.getvalue("supplier_sku")
 supplier_date = form.getvalue("supplier_date")
 
 
@@ -43,6 +42,9 @@ try:
     # connect to the database
     connection = psycopg2.connect(login.credentials)
     cursor = connection.cursor()
+
+    cursor.execute("""SELECT MAX(sku) FROM product""")
+    product_sku = cursor.fetchall()[0][0]
 
     add_product = (
         "INSERT INTO product "
@@ -68,7 +70,7 @@ try:
         "tin": supplier_tin,
         "name": supplier_name,
         "address": supplier_address,
-        "sku": supplier_sku,
+        "sku": product_sku,
         "date": supplier_date,
     }
 

@@ -37,6 +37,9 @@ try:
     connection = psycopg2.connect(login.credentials)
     cursor = connection.cursor()
 
+    cursor.execute("SELECT MAX(cust_no) FROM customer")
+    max_cust_no = cursor.fetchall()[0][0]
+
     add_client = (
         "INSERT INTO customer "
         "(cust_no, name, email, phone, address) "
@@ -44,7 +47,7 @@ try:
     )
 
     data_client = {
-        "cust_no": cust_no,
+        "cust_no": max_cust_no + 1,
         "name": name,
         "email": email,
         "phone": phone,
@@ -75,7 +78,7 @@ except psycopg2.IntegrityError as e:
 except Exception as e:
     # Print errors on the webpage if they occur
     print("<h1>An error occurred.</h1>")
-    print("<p>Unknown Error</p>")
+    print("<p>Unknown Error {}</p>".format(e))
 finally:
     if connection is not None:
         connection.close()

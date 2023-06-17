@@ -66,52 +66,47 @@ try:
         """SELECT sku FROM supplier WHERE tin = %s""", (tin,)
     )  # get the skus with supplier tin X
     supplier_skus = cursor.fetchall()
-    print("<p>supplier_skus {}</p>".format(supplier_skus))
 
-    for j in supplier_skus:  # run through the skus
-        print("<p>j {}</p>".format(j))
+    for sku in supplier_skus:  # run through the skus
         cursor.execute(
-            """SELECT COUNT(*) FROM supplier WHERE sku = %s""", j[0]
+            """SELECT COUNT(*) FROM supplier WHERE sku = %s""", sku[0]
         )  # count the supplier
         number_of_suppliers = cursor.fetchall()
-        print("<p>number_of_supplier {}</p>".format(number_of_suppliers))
 
         if (
             number_of_suppliers[0][0] == 1
         ):  # if only one supplier need to remove product
-            cursor.execute(select_order_with_sku, (j[0],))
+            cursor.execute(select_order_with_sku, (sku[0],))
 
             orders_with_sku = cursor.fetchall()
-            print("<p>orders_with_sku {}</p>".format(orders_with_sku))
 
-            for i in orders_with_sku:  # goes to each order with sku
-                print("<p>i {}</p>".format(i))
+            for order_no in orders_with_sku:  # goes to each order with sku
 
-                cursor.execute(count_contains_from_order, (i,))
+                cursor.execute(count_contains_from_order, (order_no[0],))
 
                 contains_in_order = cursor.fetchall()
-                print("<p>contains_in_Order{}</p>".format(contains_in_order))
 
                 if (
                     contains_in_order[0][0] == 1
                 ):  # if only 1 contains need to remove order
-                    print("<p>deletes_order</p>")
+                    cursor.execute("""DELETE FROM pay WHERE order_no = %s""", (order_no[0],)) #deletes pay
+
+                    cursor.execute("""DELETE FROM process WHERE order_no = %s""", (order_no[0],)) #deletes process
+
                     cursor.execute(start_transaction)  # starts transaction
 
                     cursor.execute(
-                        delete_contains_order_no, (i[0],)
+                        delete_contains_order_no, (order_no[0],)
                     )  # deletes contains
 
-                    cursor.execute(delete_pay, (i[0],))
-
-                    cursor.execute(delete_order, (i[0],))  # deletes the order
+                    cursor.execute(delete_order, (order_no[0],))  # deletes the order
 
                     cursor.execute("COMMIT;")
                 else:
-                    cursor.execute(delete_contains_order_no_and_sku, (i[0], j[0]))
+                    cursor.execute(delete_contains_order_no_and_sku, (order_no[0], sku[0]))
             cursor.execute("""DELETE FROM delivery WHERE tin = %s""", (tin,))
             cursor.execute(delete_supplier_tin, (tin,))
-            cursor.execute(delete_product, (j[0],))
+            cursor.execute(delete_product, (sku[0],))
         else:
             cursor.execute("""DELETE FROM delivery WHERE tin = %s""", (tin,))
             cursor.execute(delete_supplier_tin, (tin,))

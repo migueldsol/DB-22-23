@@ -73,30 +73,31 @@ try:
 
     orders_with_sku = cursor.fetchall()
 
-    for i in orders_with_sku:  # goes to each order with sku
-        cursor.execute(count_contains_from_order, (i,))
+    for order_no in orders_with_sku:  # goes to each order with sku
+        cursor.execute(count_contains_from_order, (order_no,))
 
         contains_in_order = cursor.fetchall()
-        print("<p>Tenho que remover</p>")
 
-        if contains_in_order[0][0] == 1:
+        if contains_in_order[0][0] == 1:                #if last contains gotta delete order
+            cursor.execute("""DELETE FROM pay WHERE order_no = %s""", (order_no[0],))  #delete pay
+
+            cursor.execute("""DELETE FROM process where order_no = %s""", (order_no[0],))  #delete process
+
             cursor.execute(start_transaction)  # starts transaction
 
-            cursor.execute(delete_contains_order_no, (i[0],))  # deletes contains
+            cursor.execute(delete_contains_order_no, (order_no[0],))  # deletes contains
 
-            cursor.execute(delete_pay, (i[0],))
-
-            cursor.execute(delete_order, (i[0],))  # deletes the order
+            cursor.execute(delete_order, (order_no[0],))  # deletes the order
 
             cursor.execute("COMMIT;")
         else:
-            cursor.execute(delete_contains_order_no_and_sku, (i[0], sku))
+            cursor.execute(delete_contains_order_no_and_sku, (order_no[0], sku))   #just deletes contain with sku X
 
     cursor.execute(delete_product, (sku,))
     connection.commit()
 
     cursor.close()
-    print("<h1>Product with sku {} Removed!</h1>".format(sku))
+    print("<h1>Product Removed!</h1>".format(sku))
 
 except psycopg2.InternalError as e:
     error_code = e.pgcode

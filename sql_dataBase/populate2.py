@@ -1,21 +1,21 @@
 from datetime import date, timedelta
 import random
 
-numbers_of_customers = 365
+numbers_of_customers = 1000
 
 number_of_products = 1000
 
 number_of_employees = 100
 
-number_of_orders = 3650
+number_of_orders = 10000
 
-number_of_orders_per_customer = 10
+number_of_orders_per_customer = 28
 
 number_of_dates_per_order = 10
 
 number_of_payments_per_customer = 5
 
-number_of_products_per_order = 1
+number_of_products_per_order = 2
 
 number_of_suppliers = 100
 

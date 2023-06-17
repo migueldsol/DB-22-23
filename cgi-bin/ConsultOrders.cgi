@@ -75,7 +75,7 @@ try:
             print('<td class="text-center">{}</td>'.format(row[i]))
         if row[2] == "No":
             print("              <td class='text-center'>")
-            print("                <form action='PayProduct.cgi' method='POST'>")
+            print("                <form action='PayOrder.cgi' method='POST'>")
             print(" <input type='hidden' name='order_no' value='{}' />".format(row[0]))
             print(" <input type='hidden' name='cust_no' value='{}' />".format(cust_no))
             print("                  <button")
