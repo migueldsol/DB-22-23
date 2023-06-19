@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>My Web Page</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="styles2.css" />
+  </head>
+  <body>
+    <div class="sidebar">
+      <a href="Home.html">Home</a>
+      <a href="Orders.cgi" class="white-link">Orders</a>
+    </div>
+    <div class="content">
+      <div class="flex-container">
+        <h1>Place Order</h1>
+        <a href="Orders.cgi" class="mb-5" style="margin-right: 25px">
+          <img
+            src="icons/back.png"
+            alt="Back"
+            style="width: 50px; height: 50px"
+          />
+        </a>
+      </div>
+      <form action="">
+        <div class="mb-3">
+          <label for="order_number" class="form-label">Order Number</label>
+          <input
+            required
+            type="number"
+            class="form-control"
+            id="order_number"
+            placeholder="Enter order number"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="customer_number" class="form-label"
+            >Customer Number</label
+          >
+          <input
+            required
+            type="number"
+            class="form-control"
+            id="customer"
+            placeholder="Enter Customer number"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="Date" class="form-label">Date</label>
+          <input
+            required
+            type="date"
+            class="form-control"
+            id="Date"
+            placeholder="Enter Supplier's SKU"
+          />
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Submit</button>
+      </form>
+    </div>
+  </body>
+</html>
