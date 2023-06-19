@@ -53,7 +53,7 @@ try:
     )
 
     data_product = {
-        "sku": product_sku,
+        "sku": product_sku + 1,
         "name": product_name,
         "description": product_description,
         "ean": product_ean,
@@ -70,7 +70,7 @@ try:
         "tin": supplier_tin,
         "name": supplier_name,
         "address": supplier_address,
-        "sku": product_sku,
+        "sku": product_sku + 1,
         "date": supplier_date,
     }
 
