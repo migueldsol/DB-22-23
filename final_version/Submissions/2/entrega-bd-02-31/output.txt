@@ -1,0 +1,20 @@
+--exercicio 1
+Gustavo Rodriguez
+James Bond
+
+--exercicio 2
+Jane Doe
+
+--exercicio 3
+Product 9
+Product 5
+
+--exercicio 4
+13,120
+11,140
+9,80
+3,600
+5,960
+7,80
+1,10
+

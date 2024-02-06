@@ -19,12 +19,10 @@ EXTRACT(YEAR FROM date) = 2023;
 
 	--ex2
 DROP INDEX name_index_product;
-CREATE INDEX name_index_product ON product USING HASH(substring(name, 1, 1));
+CREATE INDEX name_index_product ON product(name);
 
 DROP INDEX order_no_index_contains;
 CREATE INDEX order_no_index_contains ON contains(sku);
-
-CREATE INDEX sku_name_product ON product(sku, name, price);
 
 SELECT order_no, SUM(qty*price)
 FROM contains
